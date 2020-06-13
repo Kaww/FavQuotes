@@ -31,8 +31,8 @@ extension QuotesViewController: QuotesViewInput {
         quotesModel?.retrieveQuotes()
     }
     
-    func onUserChanged() {
-        quotesModel?.retrieveQuotes()
+    func onUserSelected(username: String) {
+        quotesModel?.retrieveQuotes(username: username)
     }
     
 }

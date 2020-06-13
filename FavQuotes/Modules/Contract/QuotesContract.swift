@@ -17,7 +17,7 @@ protocol QuotesViewInput: class {
     var quotesModel: QuotesControllerInput? { get set }
     
     func onViewLayout()
-    func onUserChanged()
+    func onUserSelected(username: String)
     
 }
 
@@ -29,6 +29,7 @@ protocol QuotesControllerInput: class {
     var quotesController: QuotesModelOutput? { get set }
     
     func retrieveQuotes()
+    func retrieveQuotes(username: String)
     
 }
 

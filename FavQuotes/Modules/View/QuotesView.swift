@@ -93,8 +93,7 @@ class QuotesView: UIView {
         ac.addTextField()
         ac.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] alert in
             if let username = ac.textFields![0].text {
-                QuotesService.shared.logUser(username: username)
-                self?.quotesController?.onUserChanged()
+                self?.quotesController?.onUserSelected(username: username)
             }
         }))
         
