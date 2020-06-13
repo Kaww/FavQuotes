@@ -102,6 +102,7 @@ class QuotesView: UIView {
                 self?.quotesController?.onUserSelected(username: username)
             }
         }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         let vc = quotesController as! QuotesViewController
         vc.present(ac, animated: true)
