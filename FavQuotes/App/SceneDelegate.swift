@@ -17,9 +17,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        let controller = QuotesViewController()
+        let view = QuotesView()
+        let model = QuotesModel()
+        
+        controller.quotesView = view
+        controller.quotesView?.quotesController = controller
+        controller.quotesModel = model
+        controller.quotesModel?.quotesController = controller
+        
+        let navigationController = UINavigationController(rootViewController: controller)
+        
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: HomeViewController())
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
