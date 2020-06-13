@@ -31,7 +31,8 @@ class QuoteCell: UICollectionViewCell {
             quoteLabel.text = "❝ \(quote.body) ❞"
             authorLabel.text = " ✒️ \(quote.author)"
             favoritesLabel.text = "\(quote.favorites_count) ⭐️"
-            tagsLabel.text = (quote.tags.map { String($0) }).joined(separator: ", ")
+            let tags = (quote.tags.map { String($0) }).joined(separator: ", ")
+            tagsLabel.text = tags.isEmpty ? "" : "tags: \(tags)"
         }
     }
     

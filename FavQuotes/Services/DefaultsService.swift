@@ -37,6 +37,7 @@ class DefaultsService {
     
     func deleteUser() {
         defaults.removeObject(forKey: userKey)
+        deleteQuotes()
     }
     
     

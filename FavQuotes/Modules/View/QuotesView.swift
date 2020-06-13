@@ -24,7 +24,8 @@ class QuotesView: UIView {
     override func layoutSubviews() {
         let vc = quotesController as! QuotesViewController
         
-        vc.navigationItem.rightBarButtonItem = barButtonItem
+        vc.navigationItem.rightBarButtonItem = searchUserBarButtonItem
+        vc.navigationItem.leftBarButtonItem = logoutBarButtonItem
         
         quotesController?.onViewLayout()
     }
@@ -35,7 +36,13 @@ class QuotesView: UIView {
     
     private let quoteCellID = "quoteCellID"
     
-    lazy var barButtonItem: UIBarButtonItem = {
+    lazy var logoutBarButtonItem: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(logoutUser))
+        
+        return button
+    }()
+    
+    lazy var searchUserBarButtonItem: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(chooseUser))
         
         return button
@@ -96,6 +103,18 @@ class QuotesView: UIView {
                 self?.quotesController?.onUserSelected(username: username)
             }
         }))
+        
+        let vc = quotesController as! QuotesViewController
+        vc.present(ac, animated: true)
+    }
+    
+    @objc private func logoutUser() {
+        let ac = UIAlertController(title: "Logout", message: "Are you sure ?", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [weak self] alert in
+            DefaultsService.shared.deleteUser()
+            self?.quotesController?.onViewLayout()
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         let vc = quotesController as! QuotesViewController
         vc.present(ac, animated: true)
