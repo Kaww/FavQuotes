@@ -20,7 +20,13 @@ class QuotesModel {
 // MARK: - Controller Input
 extension QuotesModel: QuotesControllerInput {
     func retrieveQuotes() {
-        self.quotes = QuotesService.shared.getQuotes()
+        QuotesService.shared.getQuotes { [weak self] quotes in
+            print("quotes from network")
+            self?.quotes = quotes
+            self?.quotesController?.onQuotesRetrieval(quotes: (self?.quotes)!)
+        }
+        // fetch from user defaults
+        print("quote from defaults")
         quotesController?.onQuotesRetrieval(quotes: self.quotes)
     }
     

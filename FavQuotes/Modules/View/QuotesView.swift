@@ -89,7 +89,17 @@ class QuotesView: UIView {
     
     // MARK: - Actions
     @objc private func chooseUser() {
-        print("Choose user")
+        let ac = UIAlertController(title: "Find by user", message: "Enter a valid username", preferredStyle: .alert)
+        ac.addTextField()
+        ac.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] alert in
+            if let username = ac.textFields![0].text {
+                QuotesService.shared.logUser(username: username)
+                self?.quotesController?.onUserChanged()
+            }
+        }))
+        
+        let vc = quotesController as! QuotesViewController
+        vc.present(ac, animated: true)
     }
     
 }
@@ -122,7 +132,7 @@ extension QuotesView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: self.collectionView.frame.width - 20, height: 100)
+        return .init(width: self.collectionView.frame.width - 20, height: 150)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

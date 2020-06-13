@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 
 class QuotesService {
@@ -24,9 +25,21 @@ class QuotesService {
         self.baseURL = baseURL
     }
     
-    func getQuotes() -> [Quote] {
-        let quote = Quote(author: "Kaww", body: "quote body", favorite_count: 42, tags: ["love", "motivation"])
-        
-        return [quote, quote, quote, quote, quote, quote, quote, quote, quote, quote, quote, quote]
+    func getQuotes(responseHandler: @escaping ([Quote]) -> Void) {
+        if let user = loggedUser {
+            let url = "\(self.baseURL)?filter=\(user.username)&type=user"
+            
+            AF.request(url, method: .get, headers: .init(self.headers))
+            .validate()
+            .responseDecodable(of: QuotesObjectRequest.self) { response in
+                if let res = response.value {
+                    responseHandler(res.quotes)
+                }
+            }
+        }
+    }
+    
+    func logUser(username: String) {
+        loggedUser = User(username: username)
     }
 }

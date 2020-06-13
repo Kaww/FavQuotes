@@ -17,6 +17,7 @@ protocol QuotesViewInput: class {
     var quotesModel: QuotesControllerInput? { get set }
     
     func onViewLayout()
+    func onUserChanged()
     
 }
 

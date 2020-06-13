@@ -12,7 +12,7 @@ import Foundation
 struct Quote: Codable {
     var author: String
     var body: String
-    var favorite_count: Int
+    var favorites_count: Int
     var tags: [String]
 }
 

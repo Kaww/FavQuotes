@@ -14,7 +14,7 @@ class QuotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Quotes"
+        title = "FavQuotes"
         self.view = quotesView as? UIView
     }
 
@@ -28,6 +28,10 @@ class QuotesViewController: UIViewController {
 // MARK: - View Input
 extension QuotesViewController: QuotesViewInput {
     func onViewLayout() {
+        quotesModel?.retrieveQuotes()
+    }
+    
+    func onUserChanged() {
         quotesModel?.retrieveQuotes()
     }
     
