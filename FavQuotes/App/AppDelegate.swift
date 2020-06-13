@@ -14,8 +14,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let controller = QuotesViewController()
+        let view = QuotesView()
+        let model = QuotesModel()
+        
+        controller.quotesView = view
+        controller.quotesView?.quotesController = controller
+        controller.quotesModel = model
+        controller.quotesModel?.quotesController = controller
+        
+        let navigationController = UINavigationController(rootViewController: controller)
+        if #available(iOS 13.0, *) {
+            navigationController.overrideUserInterfaceStyle = .light
+        }
+        
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: QuotesViewController())
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
         return true

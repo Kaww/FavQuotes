@@ -27,13 +27,17 @@ class QuotesViewController: UIViewController {
 
 // MARK: - View Input
 extension QuotesViewController: QuotesViewInput {
-    func onViewLayout() {}
+    func onViewLayout() {
+        quotesModel?.retrieveQuotes()
+    }
     
 }
 
 
 // MARK: - Model Output
 extension QuotesViewController: QuotesModelOutput {
-    func onQuotesRetrieval(quotes: [Quote]) {}
+    func onQuotesRetrieval(quotes: [Quote]) {
+        self.quotesView?.onQuotesRetrieval(quotes: quotes)
+    }
     
 }

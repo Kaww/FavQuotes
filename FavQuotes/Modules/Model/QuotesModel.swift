@@ -19,6 +19,9 @@ class QuotesModel {
 
 // MARK: - Controller Input
 extension QuotesModel: QuotesControllerInput {
-    func retrieveQuotes() {}
+    func retrieveQuotes() {
+        self.quotes = QuotesService.shared.getQuotes()
+        quotesController?.onQuotesRetrieval(quotes: self.quotes)
+    }
     
 }

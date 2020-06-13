@@ -27,6 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         controller.quotesModel?.quotesController = controller
         
         let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.overrideUserInterfaceStyle = .light
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene

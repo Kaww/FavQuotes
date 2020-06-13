@@ -47,6 +47,6 @@ protocol QuotesModelOutput: class {
 protocol QuotesControllerOutput: class {
     var quotesController: QuotesViewInput? { get set }
     
-    func onQuotesRetrieval(task: [Quote])
+    func onQuotesRetrieval(quotes: [Quote])
     
 }
