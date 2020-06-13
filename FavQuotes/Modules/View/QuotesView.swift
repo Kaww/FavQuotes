@@ -56,7 +56,6 @@ class QuotesView: UIView {
         cv.delegate = self
         cv.dataSource = self
         cv.backgroundColor = .white
-        cv.showsVerticalScrollIndicator = false
         
         cv.register(QuoteCell.self, forCellWithReuseIdentifier: quoteCellID)
         

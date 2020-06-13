@@ -88,7 +88,8 @@ class QuoteCell: UICollectionViewCell {
 extension QuoteCell {
     
     private func setupUI() {
-        self.backgroundColor = .systemBlue
+        let lightColor = UIColor.init(red: 66 / 255, green: 157 / 255, blue: 255 / 255, alpha: 1)
+        self.addGradientWithCornerRadius(startColor: lightColor, endColor: .systemBlue, radius: 10)
         self.layer.cornerRadius = 10
         
         self.addSubview(quoteLabel)
